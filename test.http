@@ -1,0 +1,10 @@
+# GET http://localhost:8080/api/sel
+GET http://localhost:8080/api/sel/ById/1
+
+post http:///localhost:8080/api/sel
+
+{
+    "ClassName":"cn",
+    "ClassDetail":"cd",
+    "ClassTreatment":"tr"
+}
