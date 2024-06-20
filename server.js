@@ -6,11 +6,11 @@ const port = 8080;
 
 var mysql = require('mysql');
 var pool = mysql.createPool({
-    connectionLimit: 10,
-    host: 'localhost',
-    user: 'root',
-    password: '',
-    database: 'clinic'
+    connectionLimit : 10,
+    host : 'localhost',
+    user : 'root',
+    password : '',
+    database : 'clinic',
 });
 
 const bodyParser = require('body-parser');
@@ -18,16 +18,27 @@ pool.query = util.promisify(pool.query);
 app.use(cors());
 app.use(bodyParser.json());
 
-const DR = require("./libs/DR");
-const DS2 = require("./libs/DS2");
-
+const Dr = require("./libs/DR");
 
 app.get("/api/sel", async (req, res) => {
-
     try {
+        var results = await Dr.selectDr(pool);
+        res.json({
+            result: true,
+            data: results
+        });
+    } catch (ex) {
+        res.json({
+            result: false,
+            message: ex.message
+        });
+    }
 
-        var results = await DR.selectDR(pool);
-
+});
+app.get("/api/selById/:ClassID", async (req, res) => {
+    const ClassID = req.params.ClassID;
+    try{
+        var results = await Dr.selectDrById(pool, ClassID);
         res.json({
             result: true,
             data: results
@@ -41,39 +52,14 @@ app.get("/api/sel", async (req, res) => {
     }
 });
 
-app.get("/api/sel/ById/:ClassID", async (req, res) => {
-    const classid = req.params.ClassID;
-
-    try {
-
-        var results = await DS2.selectDRById(pool,classid);
-        
-
-        res.json({
-            result: true,
-            data: results
-        });
-
-    } catch (ex) {
-        res.json({
-            result: false,
-            message: ex.message
-        });
-    }
-});
-
-
-app.post("api/deleteById", async (req, res) => {
+app.post("/api/del", async (req, res) => {
     const input = req.body;
-
-    try {
-
-        var results = await DS2.DeleteDRById(pool,input.ClassID);
-
+    try{
+        var results = await Dr.deleteDr(pool, input.ClassID);
         res.json({
             result: true,
-            data: results
         });
+
     } catch (ex) {
         res.json({
             result: false,
@@ -82,9 +68,42 @@ app.post("api/deleteById", async (req, res) => {
     }
 });
 
-app.get('/', (req, res) => {
-    res.send('Hello exam');
+app.post("/api/insert", async (req, res) => {
+    const input = req.body;
+    try{
+        var results = await Dr.insertDr(pool, input.ClassName , input.ClassDetail , input.ClassTreatment);
+        res.json({
+            result: true,
+        });
+
+    } catch (ex) {
+        res.json({
+            result: false,
+            message: ex.message
+        });
+    }
 });
 
-app.listen(port, () => { console.log(`exam app port${port}`) });
+app.post("/api/update", async (req, res) => {
+    const input = req.body;
+    try{
+        var results = await Dr.updateDr(pool , input.ClassName , input.ClassDetail , input.ClassTreatment , input.ClassID);
+        res.json({
+            result: true,
+        });
 
+    } catch (ex) {
+        res.json({
+            result: false,
+            message: ex.message
+        });
+    }
+});
+ 
+app.get('/', (req,res) => {
+    res.send('Hello express1');
+});
+
+app.listen(port,() => {
+    console.log(`Example app port ${port}`);
+});

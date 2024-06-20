@@ -1,17 +1,39 @@
 # GET http://localhost:8080/api/sel
-# GET http://localhost:8080/api/sel/ById/1
+# GET http://localhost:8080/api/selById/1
+# GET http://localhost:8080/api/selById/2
 
-# post http:///localhost:8080/api/sel
+# POST http://localhost:8080/api/del
+# Content-Type:application/json
 
 # {
-#     "ClassName":"cn",
-#     "ClassDetail":"cd",
-#     "ClassTreatment":"tr"
+#     "ClassID" : 1
+
 # }
 
-post http:///localhost:8080/api/deleteById
+# POST http://localhost:8080/api/insert
+# Content-Type:application/json
+
+# {
+# "ClassName" : "dd",
+# "ClassDetail" : "ff",
+# "ClassTreatment": "Wowww"
+# }
+
+POST http://localhost:8080/api/update
 Content-Type:application/json
 
 {
-   "ClassID" : 2
+"ClassID" : 4,
+"ClassName" : "D4 liq",
+"ClassDetail" : "These patients have at least one MA but no other findings",
+"ClassTreatment": "GGGGG"
 }
+
+# POST http://localhost:8080/api/insert
+# Content-Type:application/json
+
+# {
+# "ClassName" : "cn",
+# "ClassDetail": "cd",
+# "ClassTreatment" : "tr"
+# }
