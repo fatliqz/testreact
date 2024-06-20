@@ -1,5 +1,7 @@
 # GET http://localhost:8080/api/sel
-GET http://localhost:8080/api/sel/ById/1
+
+
+GET http://localhost:8080/api/selById/1
 
 post http:///localhost:8080/api/sel
 

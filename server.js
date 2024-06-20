@@ -41,12 +41,12 @@ app.get("/api/sel", async (req, res) => {
     }
 });
 
-app.get("/api/sel/ById/:ClassID", async (req, res) => {
-    const classid = req.params.ClassID;
+app.get("/api/selById/:ClassID", async (req, res) => {
+    const ClassID = req.params.ClassID;
 
     try {
 
-        var results = await DS2.selectDRById(pool.classid);
+        var results = await DS2.selectDRById(pool,ClassID);
 
         res.json({
             result: true,
