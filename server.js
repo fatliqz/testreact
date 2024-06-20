@@ -46,7 +46,8 @@ app.get("/api/sel/ById/:ClassID", async (req, res) => {
 
     try {
 
-        var results = await DS2.selectDRById(pool, classid);
+        var results = await DS2.selectDRById(pool,classid);
+        
 
         res.json({
             result: true,
