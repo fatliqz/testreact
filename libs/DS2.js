@@ -11,5 +11,6 @@ module.exports = {
             + `where ClassID = ? `
             sql = mysql.format(sql,[ClassID]);
         return await pool.query(sql);
-    }
+    },
+    deleteById: async
 }
