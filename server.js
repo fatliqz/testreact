@@ -41,12 +41,12 @@ app.get("/api/sel", async (req, res) => {
     }
 });
 
-app.get("/api/selById/:ClassID", async (req, res) => {
-    const ClassID = req.params.ClassID;
+app.get("/api/sel/ById/:ClassID", async (req, res) => {
+    const classid = req.params.ClassID;
 
     try {
 
-        var results = await DS2.selectDRById(pool,ClassID);
+        var results = await DS2.selectDRById(pool, classid);
 
         res.json({
             result: true,
@@ -59,11 +59,31 @@ app.get("/api/selById/:ClassID", async (req, res) => {
             message: ex.message
         });
     }
-})
+});
+
+
+app.post("api/deleteById", async (req, res) => {
+    const input = req.body;
+
+    try {
+
+        var results = await DS2.DeleteDRById(pool,input.ClassID);
+
+        res.json({
+            result: true,
+            data: results
+        });
+    } catch (ex) {
+        res.json({
+            result: false,
+            message: ex.message
+        });
+    }
+});
 
 app.get('/', (req, res) => {
     res.send('Hello exam');
 });
 
-app.listen(port, () => { console.log(`exam app port${port}`)});
+app.listen(port, () => { console.log(`exam app port${port}`) });
 

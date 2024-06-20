@@ -1,12 +1,17 @@
 # GET http://localhost:8080/api/sel
+# GET http://localhost:8080/api/sel/ById/1
 
+# post http:///localhost:8080/api/sel
 
-GET http://localhost:8080/api/selById/1
+# {
+#     "ClassName":"cn",
+#     "ClassDetail":"cd",
+#     "ClassTreatment":"tr"
+# }
 
-post http:///localhost:8080/api/sel
+post http:///localhost:8080/api/deleteById
+Content-Type:application/json
 
 {
-    "ClassName":"cn",
-    "ClassDetail":"cd",
-    "ClassTreatment":"tr"
+   "ClassID" : 2
 }
